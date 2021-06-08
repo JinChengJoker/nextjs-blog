@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn} from "typeorm";
 import {User} from "./User";
 import {Post} from "./Post";
 
@@ -6,18 +6,14 @@ import {Post} from "./Post";
 export class Comment {
   @PrimaryGeneratedColumn()
   id: number;
-  
+
   @Column('text')
   content: string;
 
-  @Column('date', {
-    default: "now()"
-  })
+  @CreateDateColumn()
   createdAt: string;
 
-  @Column('date', {
-    default: "now()"
-  })
+  @UpdateDateColumn()
   updatedAt: string;
 
   @ManyToOne(type => User, user => user.comments)

@@ -1,5 +1,13 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany} from "typeorm";
-import { User } from "./User";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn
+} from "typeorm";
+import {User} from "./User";
 import {Comment} from "./Comment";
 
 @Entity('posts')
@@ -13,19 +21,15 @@ export class Post {
   @Column('text')
   content: string;
 
-  @Column('date', {
-    default: "now()"
-  })
+  @CreateDateColumn()
   createdAt: string;
 
-  @Column('date', {
-    default: "now()"
-  })
+  @UpdateDateColumn()
   updatedAt: string;
 
   @ManyToOne(type => User, user => user.posts)
   user: User;
 
-  @OneToMany(type=> Comment, comment => comment.post)
+  @OneToMany(type => Comment, comment => comment.post)
   comments: Comment[];
 }

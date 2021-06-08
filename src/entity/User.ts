@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn} from "typeorm";
 import {Post} from "./Post";
 import {Comment} from "./Comment";
 
@@ -13,14 +13,10 @@ export class User {
   @Column('varchar')
   password: string;
 
-  @Column('date', {
-    default: "now()"
-  })
+  @CreateDateColumn()
   createdAt: string;
 
-  @Column('date', {
-    default: "now()"
-  })
+  @UpdateDateColumn()
   updatedAt: string;
 
   @OneToMany(type => Post, post => post.user)
