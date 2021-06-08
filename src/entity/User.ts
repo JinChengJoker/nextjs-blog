@@ -1,4 +1,6 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from "typeorm";
+import {Post} from "./Post";
+import {Comment} from "./Comment";
 
 @Entity('users')
 export class User {
@@ -6,11 +8,24 @@ export class User {
   id: number;
 
   @Column('varchar')
-  name: string;
+  username: string;
 
-  @Column('smallint')
-  gender: number;
+  @Column('varchar')
+  password: string;
 
-  @Column('int')
-  age: number;
+  @Column('date', {
+    default: "now()"
+  })
+  createdAt: string;
+
+  @Column('date', {
+    default: "now()"
+  })
+  updatedAt: string;
+
+  @OneToMany(type => Post, post => post.user)
+  posts: Post[];
+
+  @OneToMany(type => Comment, comment => comment.user)
+  comments: Comment[];
 }
