@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"babel ./src -w --out-dir dist --extensions .ts,.tsx\"",
     "build": "next build",
-    "start": "next start",
-    "ormstart": "babel ./src --out-dir dist --extensions .ts,.tsx && node dist/index.js"
+    "start": "next start"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
@@ -27,6 +26,7 @@
     "@types/node": "^15.6.1",
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
+    "concurrently": "^6.2.0",
     "typescript": "^4.3.2"
   }
 }
