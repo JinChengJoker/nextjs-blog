@@ -1,9 +1,14 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
+import {User} from "./entity/User";
 
 createConnection()
-  .then(connection => {
-    // 这里可以写实体操作相关的代码
-    console.log(connection)
+  .then(async connection => {
+    const user = new User()
+    user.name = 'JinCheng'
+    user.gender = 1
+    user.age= 27
+    await connection.manager.save(user)
+    await connection.close()
   })
   .catch(error => console.log(error));
