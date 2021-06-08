@@ -5,17 +5,24 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "ormstart": "npx babel ./src --out-dir dist --extensions \".ts,.tsx\" && node dist/index.js"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
     "marked": "^2.0.7",
     "next": "^10.0.0",
     "next-images": "^1.7.0",
+    "pg": "^8.6.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.34"
   },
   "devDependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-proposal-decorators": "^7.14.2",
     "@types/marked": "^2.0.3",
     "@types/node": "^15.6.1",
     "@types/react": "^17.0.8",
