@@ -18,7 +18,7 @@ createConnection()
     post.content = 'Hello NextJs!'
     post.user = user
     await manager.save(post)
-    
+
     const comment = new Comment()
     comment.content = 'Awesome!'
     comment.user = user
