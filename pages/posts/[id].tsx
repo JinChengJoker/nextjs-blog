@@ -6,6 +6,10 @@ type Props = {
   post: Post
 }
 
+type Params = {
+  id: string;
+}
+
 const PostPage = (props: Props) => {
   const {post} = props
   return (
@@ -20,10 +24,10 @@ const PostPage = (props: Props) => {
 
 export default PostPage;
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext<any>) => {
+export const getServerSideProps: GetServerSideProps<object, Params> = async (context) => {
   const connection = await dbConnectionPromise
   const postRepository = connection.getRepository(Post)
-  const post = await postRepository.findOne(context.params.id)
+  const post = await postRepository.findOne(context.params?.id)
   return {
     props: {
       post: JSON.parse(JSON.stringify(post))
