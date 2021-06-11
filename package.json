@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev\" \"babel ./src -w --out-dir dist --extensions .ts,.tsx\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
