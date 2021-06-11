@@ -1,9 +1,8 @@
 import {NextApiHandler} from "next";
-import dbConnectionPromise from "lib/dbConnection";
 import {User} from "src/entity/User";
+import dbConnectionPromise from "lib/dbConnection";
 
 const users: NextApiHandler = async (req, res) => {
-  console.log(req.body)
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
   if (req.method === 'POST') {
     const {username, password, passwordRepeat} = req.body;
@@ -14,10 +13,13 @@ const users: NextApiHandler = async (req, res) => {
     const errors = await user.validate()
     if (errors) {
       res.status(422)
-      res.write(JSON.stringify(errors))
+      res.write(JSON.stringify({error: errors}))
     } else {
+      const connection = await dbConnectionPromise
+      const userRepository = connection.getRepository(User)
+      await userRepository.save(user)
       res.status(200)
-      res.write('ok!')
+      res.write(JSON.stringify({user: user.omit()}))
     }
   } else {
     res.status(404)

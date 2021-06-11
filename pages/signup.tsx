@@ -2,26 +2,32 @@ import {NextPage} from "next";
 import {FormEvent, useCallback, useState} from "react";
 import axios, {AxiosError} from "axios";
 
+const initErrors = {
+  username: [],
+  password: [],
+  passwordRepeat: [],
+}
+
 const SignupPage: NextPage = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
     passwordRepeat: '',
   })
-  const [errors, setErrors] = useState({
-    username: [],
-    password: [],
-    passwordRepeat: [],
-  })
+  const [errors, setErrors] = useState(initErrors)
 
   const onSubmit = useCallback(async (e: FormEvent) => {
     e.preventDefault()
-    await axios.post('/api/v1/users').catch((error: AxiosError) => {
-      console.log('--------------')
-      console.dir(error)
-      console.log('--------------')
+    const response = await axios.post('/api/v1/users', formData).catch((error: AxiosError) => {
       const {response} = error
+      if (response?.status === 422) {
+        setErrors(response.data.error)
+      }
     })
+    if (response?.data.user) {
+      setErrors(initErrors)
+      alert('注册成功！')
+    }
   }, [formData])
 
   return (
