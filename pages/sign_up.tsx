@@ -1,6 +1,7 @@
 import {NextPage} from "next";
 import {FormEvent, useCallback, useState} from "react";
 import axios, {AxiosError} from "axios";
+import {useRouter} from "next/router";
 
 const initErrors = {
   username: [],
@@ -8,7 +9,8 @@ const initErrors = {
   passwordRepeat: [],
 }
 
-const SignupPage: NextPage = () => {
+const SignUpPage: NextPage = () => {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -27,6 +29,7 @@ const SignupPage: NextPage = () => {
     if (response?.data.user) {
       setErrors(initErrors)
       alert('注册成功！')
+      await router.push('/sign_in')
     }
   }, [formData])
 
@@ -84,4 +87,4 @@ const SignupPage: NextPage = () => {
   )
 }
 
-export default SignupPage
+export default SignUpPage

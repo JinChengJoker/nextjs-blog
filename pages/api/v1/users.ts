@@ -1,12 +1,13 @@
 import {NextApiHandler} from "next";
-import {User} from "src/entity/User";
+import {UserSignUp} from "src/models/UserSignUp";
 import dbConnectionPromise from "lib/dbConnection";
+import {User} from "src/entity/User";
 
 const users: NextApiHandler = async (req, res) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
   if (req.method === 'POST') {
     const {username, password, passwordRepeat} = req.body;
-    const user = new User()
+    const user = new UserSignUp()
     user.username = username
     user.password = password
     user.passwordRepeat = passwordRepeat
