@@ -14,13 +14,13 @@ const users: NextApiHandler = async (req, res) => {
     const errors = await user.validate()
     if (errors) {
       res.status(422)
-      res.write(JSON.stringify({error: errors}))
+      res.json({error: errors})
     } else {
       const connection = await dbConnectionPromise
       const userRepository = connection.getRepository(User)
       await userRepository.save(user)
       res.status(200)
-      res.write(JSON.stringify({user: user.omit()}))
+      res.json({user: user.omit()})
     }
   } else {
     res.status(404)

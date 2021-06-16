@@ -1,10 +1,5 @@
-import {
-  Entity,
-  BeforeInsert
-} from "typeorm";
 import {User} from 'src/entity/User'
 import dbConnectionPromise from "lib/dbConnection";
-import md5 from "md5";
 
 type Errors = {
   username: string[];
@@ -12,14 +7,8 @@ type Errors = {
   passwordRepeat: string[];
 }
 
-@Entity('users')
 export class UserSignUp extends User {
   passwordRepeat: string;
-
-  @BeforeInsert()
-  md5Password() {
-    this.password = md5(this.password)
-  }
 
   async validate() {
     const {username, password, passwordRepeat} = this
