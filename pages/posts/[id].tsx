@@ -14,7 +14,7 @@ const PostPage = (props: Props) => {
   const {post} = props
   return (
     <div>
-      <h1>{post.title}</h1>
+      <h2>{post.title}</h2>
       <article>
         {post.content}
       </article>

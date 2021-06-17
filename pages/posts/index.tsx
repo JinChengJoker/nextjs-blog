@@ -11,7 +11,7 @@ const PostsIndex: NextPage<Props> = (props) => {
   const {posts} = props
   return (
     <>
-      <h1>文章列表</h1>
+      <h2>文章列表</h2>
       <ul>
         {posts.map(post => (
           <li key={post.id}>

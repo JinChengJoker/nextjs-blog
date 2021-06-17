@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = ironSession(async (context
   const user = context.req.session.get('user')
   return {
     props: {
-      user
+      user: user || null
     }
   }
 })
