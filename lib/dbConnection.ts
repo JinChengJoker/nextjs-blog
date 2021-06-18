@@ -10,6 +10,7 @@ const create = async () => {
   // @ts-ignore
   return await createConnection({
     ...config,
+    host: process.env.NODE_ENV === 'production' ? config.host : 'localhost',
     entities: [Post, User, Comment]
   })
 }
