@@ -12,10 +12,11 @@ COPY yarn.lock ./
 RUN yarn install
 # If you are building your code for production
 # RUN npm ci --only=production
-RUN yarn build
 
 # Bundle app source
 COPY . .
+
+RUN yarn build
 
 EXPOSE 3000
 CMD [ "yarn", "start" ]
