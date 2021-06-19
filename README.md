@@ -29,7 +29,6 @@ yarn dev
 
 ## 程序 Docker 化
 ```bash
-yarn build
 docker build . -t <your username>/nextjs-blog
 ```
 
