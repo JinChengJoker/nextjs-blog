@@ -27,6 +27,12 @@ yarn install
 yarn dev
 ```
 
+## 确保在同一网络
+```shell
+docker run -it --network nextjs-blog nicolaka/netshoot
+dig postgres
+```
+
 ## 程序 Docker 化
 ```bash
 docker build . -t <your username>/nextjs-blog
