@@ -5,7 +5,7 @@
   "port": 5432,
   "username": "postgres",
   "password": "123456",
-  "database": "test",
+  "database": "blog",
   "synchronize": true,
   "entities": [
     "dist/entity/*.js"

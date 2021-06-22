@@ -17,7 +17,7 @@ docker run -d \
 ```bash
 docker exec -it <postgres-container-id> bash
 psql -U postgres
-CREATE DATABASE test;
+CREATE DATABASE blog;
 ```
 
 ## 开发项目

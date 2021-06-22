@@ -20,3 +20,9 @@ RUN yarn build
 
 EXPOSE 3000
 CMD [ "yarn", "start" ]
+
+
+FROM nginx:1.20.1
+
+#COPY nginx.conf /usr/share/nginx/html
+COPY ./.next/static /usr/share/nginx/html
