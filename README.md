@@ -47,7 +47,7 @@ docker build --network blog . -t <your username>/nextjs-blog
 
 ## Docker 运行程序
 ```bash
-docker run -dp 3000:3000 \
-  --network blog \
+docker run -dp 8080:8080 \
+  --network blog --network-alias next \
   <your username>/nextjs-blog
 ```
