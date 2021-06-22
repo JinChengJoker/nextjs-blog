@@ -41,12 +41,13 @@ dig postgres
 
 ## 程序 Docker 化
 ```bash
-docker build . -t <your username>/nextjs-blog
+cd project
+docker build --network blog . -t <your username>/nextjs-blog
 ```
 
 ## Docker 运行程序
 ```bash
 docker run -dp 3000:3000 \
-  --network nextjs-blog \
+  --network blog \
   <your username>/nextjs-blog
 ```
