@@ -20,8 +20,3 @@ RUN yarn build
 
 EXPOSE 3000
 CMD [ "yarn", "start" ]
-
-
-FROM nginx:1.20.1
-
-COPY --from=build /app/nginx.conf /etc/nginx/conf.d/default.conf
