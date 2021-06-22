@@ -46,6 +46,20 @@ docker run -d --network blog --network-alias next -p 3000:3000 <your username>/n
 ```
 
 ## Docker 运行 Nginx
+在 /home/cheng 下创建 nginx.conf 文件
+```nginx configuration
+server {
+    listen 8080;
+    listen [::]:8080;
+
+    server_name localhost;
+
+    location / {
+        proxy_pass http://next:3000;
+    }
+}
+```
+然后运行容器：
 ```shell
 docker run -d --network blog -p 80:8080 -v /home/cheng/nginx.conf:/etc/nginx/conf.d/default.conf nginx:1.20.1
 ```
