@@ -1,4 +1,4 @@
-FROM node:14.17.0
+FROM node:14.17.0 as build
 
 # Create app directory
 WORKDIR /app
@@ -23,3 +23,5 @@ CMD [ "yarn", "start" ]
 
 
 FROM nginx:1.20.1
+
+COPY --from=build /app/nginx.conf /etc/nginx/nginx.conf
