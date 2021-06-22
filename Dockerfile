@@ -1,4 +1,4 @@
-FROM node:14.17.0 as build
+FROM node:14.17.0
 
 # Create app directory
 WORKDIR /app
