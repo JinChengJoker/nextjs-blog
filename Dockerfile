@@ -1,4 +1,4 @@
-FROM node:14.17.0
+FROM node:14.17.0 as builder
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -25,4 +25,4 @@ CMD [ "yarn", "start" ]
 FROM nginx:1.20.1
 
 #COPY nginx.conf /usr/share/nginx/html
-COPY ./.next/static /usr/share/nginx/html
+COPY --from=builder /usr/src/app/.next/static /usr/share/nginx/html
