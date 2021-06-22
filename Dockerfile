@@ -1,12 +1,12 @@
-FROM node:14.17.0 as builder
+FROM node:14.17.0
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
-COPY package*.json ./
+COPY package.json ./
 COPY yarn.lock ./
 
 RUN yarn install
@@ -20,9 +20,3 @@ RUN yarn build
 
 EXPOSE 3000
 CMD [ "yarn", "start" ]
-
-
-FROM nginx:1.20.1
-
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /usr/src/app/.next /usr/share/nginx/html

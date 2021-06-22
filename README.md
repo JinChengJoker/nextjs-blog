@@ -1,14 +1,20 @@
+## Docker 创建 Volume
+```shell
+docker volume create blog-db
+```
+
 ## Docker 创建网络
 ```bash
-docker network create nextjs-blog
+docker network create blog
 ```
 
 ## Docker 安装运行 PostgreSQL
+需要使用 root 权限！否则无法访问 docker volume！
 ```bash
 docker run -d \
-  --network nextjs-blog --network-alias postgres \
+  --network blog --network-alias postgres \
   -p 5432:5432 \
-  -v blog-database:/var/lib/postgres \
+  -v blog-db:/var/lib/postgresql/data \
   -e POSTGRES_PASSWORD=123456 \
   postgres:13.3
 ```
@@ -29,7 +35,7 @@ yarn dev
 
 ## 确保在同一网络
 ```shell
-docker run -it --network nextjs-blog nicolaka/netshoot
+docker run -it --network blog nicolaka/netshoot
 dig postgres
 ```
 
