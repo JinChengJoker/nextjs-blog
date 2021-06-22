@@ -42,10 +42,10 @@ docker build --network blog . -t <your username>/nextjs-blog
 
 ## Docker 运行程序
 ```bash
-docker run -d --network blog -p 3000:3000 <your username>/nextjs-blog
+docker run -d --network blog --network-alias next -p 3000:3000 <your username>/nextjs-blog
 ```
 
 ## Docker 运行 Nginx
 ```shell
-docker run -d --network blog -p 80:80 -v /home/cheng/nginx.conf:/etc/nginx/conf.d/default.conf nginx:1.20.1
+docker run -d --network blog -p 80:8080 -v /home/cheng/nginx.conf:/etc/nginx/conf.d/default.conf nginx:1.20.1
 ```
