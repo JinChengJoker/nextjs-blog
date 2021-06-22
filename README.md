@@ -11,12 +11,7 @@ docker network create blog
 ## Docker 安装运行 PostgreSQL
 需要使用 root 权限！否则无法访问 docker volume！
 ```bash
-docker run -d \
-  --network blog --network-alias postgres \
-  -p 5432:5432 \
-  -v blog-db:/var/lib/postgresql/data \
-  -e POSTGRES_PASSWORD=123456 \
-  postgres:13.3
+docker run -d --network blog --network-alias postgres -p 5432:5432 -v blog-db:/var/lib/postgresql/data -e POSTGRES_PASSWORD=123456 postgres:13.3
 ```
 
 ## 创建数据库
@@ -47,7 +42,10 @@ docker build --network blog . -t <your username>/nextjs-blog
 
 ## Docker 运行程序
 ```bash
-docker run -dp 3000:3000 \
-  --network blog \
-  <your username>/nextjs-blog
+docker run -d --network blog -p 3000:3000 <your username>/nextjs-blog
+```
+
+## Docker 运行 Nginx
+```shell
+docker run -d --network blog -p 80:80 -v /home/cheng/nginx.conf:/etc/nginx/conf.d/default.conf nginx:1.20.1
 ```
