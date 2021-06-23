@@ -11,7 +11,7 @@ docker network create blog
 ## Docker 安装运行 PostgreSQL
 需要使用 root 权限！否则无法访问 docker volume！
 ```bash
-docker run -d --network blog --network-alias postgres -p 5432:5432 -v blog-db:/var/lib/postgresql/data -e POSTGRES_PASSWORD=123456 postgres:13.3
+docker run --name postgresql -d --network blog --network-alias postgres -p 5432:5432 -v blog-db:/var/lib/postgresql/data -e POSTGRES_PASSWORD=123456 postgres:13.3
 ```
 
 ## 创建数据库
@@ -42,7 +42,7 @@ docker build --network blog . -t <your username>/nextjs-blog
 
 ## Docker 运行程序
 ```bash
-docker run -d --network blog --network-alias next -p 3000:3000 <your username>/nextjs-blog
+docker run --name next -d --network blog --network-alias next -p 3000:3000 <your username>/nextjs-blog
 ```
 
 ## Docker 运行 Nginx
@@ -78,5 +78,10 @@ docker cp <nextjs-blog-container-id>:"/app/.next/static" "/home/cheng/app/.next/
 ```
 然后运行 Nginx 容器：
 ```shell
-docker run -d --network blog -p 80:8080 -v /home/cheng/nginx.conf:/etc/nginx/conf.d/default.conf -v /home/cheng/app/.next/static/:/usr/share/nginx/html/_next/static/ nginx:1.20.1
+docker run --name nginx -d --network blog -p 80:8080 -v /home/cheng/nginx.conf:/etc/nginx/conf.d/default.conf -v /home/cheng/app/.next/static/:/usr/share/nginx/html/_next/static/ nginx:1.20.1
+```
+
+## 一键部署
+```shell
+ssh root@<host> 'bash -s' < deploy.sh
 ```
