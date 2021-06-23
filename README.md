@@ -62,6 +62,14 @@ server {
     location / {
         proxy_pass http://next:3000;
     }
+    
+    gzip on;
+    gzip_min_length  500;
+    gzip_proxied     any;
+    gzip_comp_level 4;
+    gzip_types  text/css text/javascript text/xml text/plain text/x-component application/javascript application/json application/xml application/rss+xml font/truetype font/opentype application/vnd.ms-fontobject image/svg+xml;
+    gzip_vary on;
+    gzip_disable     "msie6";
 }
 ```
 拷贝静态文件到 Nginx 挂载的目录
