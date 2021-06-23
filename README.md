@@ -53,13 +53,22 @@ server {
     listen [::]:8080;
 
     server_name localhost;
+    
+    location ~ ^/_next/static/ {
+        root /usr/share/nginx/html/;
+        expires 30d;
+    }
 
     location / {
         proxy_pass http://next:3000;
     }
 }
 ```
-然后运行容器：
+拷贝静态文件到 Nginx 挂载的目录
 ```shell
-docker run -d --network blog -p 80:8080 -v /home/cheng/nginx.conf:/etc/nginx/conf.d/default.conf nginx:1.20.1
+docker cp <nextjs-blog-container-id>:"/app/.next/static" "/home/cheng/app/.next/"
+```
+然后运行 Nginx 容器：
+```shell
+docker run -d --network blog -p 80:8080 -v /home/cheng/nginx.conf:/etc/nginx/conf.d/default.conf -v /home/cheng/app/.next/static/:/usr/share/nginx/html/_next/static/ nginx:1.20.1
 ```
