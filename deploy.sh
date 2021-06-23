@@ -3,7 +3,7 @@ echo "deploy start...";
 echo "[1/6] cd /home/cheng/app/nextjs-blog"
 cd /home/cheng/app/nextjs-blog &&
 
-echo "[2/6] - git pull"
+echo "[2/6] git pull"
 git pull &&
 
 echo "[3/6] docker build --network blog . -t cheng/nextjs-blog"
