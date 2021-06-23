@@ -83,5 +83,6 @@ docker run --name nginx -d --network blog -p 80:8080 -v /home/cheng/nginx.conf:/
 
 ## 一键部署
 ```shell
+git push
 ssh root@<host> 'bash -s' < deploy.sh
 ```

@@ -10,7 +10,6 @@ export default function Home() {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
         <p>
           <Link href="/posts"><a>→ 文章列表</a></Link>
         </p>
